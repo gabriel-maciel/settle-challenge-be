@@ -11,16 +11,16 @@ const init = async () => {
         host: '0.0.0.0'
     });
 
-    server.settings.uri =
+    server.connection({ routes: { cors: true } })
 
-        server.route({
-            method: 'POST',
-            path: '/getRates',
-            handler: async (req, h) => {
-                const pairs = await ratesService.getRates();
-                return h.response(pairs);
-            }
-        })
+    server.route({
+        method: 'POST',
+        path: '/getRates',
+        handler: async (req, h) => {
+            const pairs = await ratesService.getRates();
+            return h.response(pairs);
+        }
+    })
 
     server.route({
         method: 'POST',
@@ -44,8 +44,6 @@ const init = async () => {
 
     await server.start();
     console.log(`Server running on port ${server.info.port}`);
-    console.log(`Server host ${server.info.host}`);
-    console.log(`Enviroment variable host ${process.env.HOST}`);
 }
 
 init();

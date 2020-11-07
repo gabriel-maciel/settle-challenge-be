@@ -55,7 +55,6 @@ const getRatesWithFees = async () => {
     return rates;
 }
 
-
 module.exports.getRates = getRates;
 module.exports.addRateWithFees = addRateWithFees;
 module.exports.getRatesWithFees = getRatesWithFees; 
