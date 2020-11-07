@@ -8,17 +8,19 @@ const port = process.env.PORT || 4000;
 const init = async () => {
     const server = new Hapi.Server({
         port: port,
-        host: process.env.HOST
+        host: '0.0.0.0'
     });
 
-    server.route({
-        method: 'POST',
-        path: '/getRates',
-        handler: async (req, h) => {
-            const pairs = await ratesService.getRates();
-            return h.response(pairs);
-        }
-    })
+    server.settings.uri =
+
+        server.route({
+            method: 'POST',
+            path: '/getRates',
+            handler: async (req, h) => {
+                const pairs = await ratesService.getRates();
+                return h.response(pairs);
+            }
+        })
 
     server.route({
         method: 'POST',
@@ -42,6 +44,8 @@ const init = async () => {
 
     await server.start();
     console.log(`Server running on port ${server.info.port}`);
+    console.log(`Server host ${server.info.host}`);
+    console.log(`Enviroment variable host ${process.env.HOST}`);
 }
 
 init();
