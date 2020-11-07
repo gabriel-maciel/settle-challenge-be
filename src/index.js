@@ -11,7 +11,7 @@ const init = async () => {
         host: '0.0.0.0'
     });
 
-    server.connection({ routes: { cors: true } })
+    // server.connection({ routes: { cors: true } })
 
     server.route({
         method: 'POST',
@@ -42,8 +42,20 @@ const init = async () => {
 
     })
 
-    await server.start();
-    console.log(`Server running on port ${server.info.port}`);
+    try {
+        await server.register({
+            plugin: require('hapi-cors'),
+            options: {
+                origins: ['*']
+            }
+        })
+
+        await server.start();
+        console.log(`Server running on port ${server.info.port}`);
+    } catch (err) {
+        console.log(err);
+        process.exit(1);
+    }
 }
 
 init();
