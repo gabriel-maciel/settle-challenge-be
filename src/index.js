@@ -7,11 +7,14 @@ const port = process.env.PORT || 4000;
 
 const init = async () => {
     const server = new Hapi.Server({
+        host: '0.0.0.0',
         port: port,
-        host: '0.0.0.0'
+        routes: {
+            cors: {
+                origin: ['*']
+            }
+        }
     });
-
-    // server.connection({ routes: { cors: true } })
 
     server.route({
         method: 'POST',
@@ -42,20 +45,8 @@ const init = async () => {
 
     })
 
-    try {
-        await server.register({
-            plugin: require('hapi-cors'),
-            options: {
-                origins: ['*']
-            }
-        })
-
-        await server.start();
-        console.log(`Server running on port ${server.info.port}`);
-    } catch (err) {
-        console.log(err);
-        process.exit(1);
-    }
+    await server.start();
+    console.log(`Server running on port ${server.info.port}`);
 }
 
 init();
