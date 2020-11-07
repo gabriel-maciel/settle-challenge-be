@@ -1,0 +1,21 @@
+{
+  "name": "settle-challenge-be",
+  "version": "1.0.0",
+  "description": "A simple Api for view and create common symbol pair rates with fees starting from Fixer.io service",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "author": "Gabriel Maciel",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/hapi": "^20.0.1",
+    "axios": "^0.21.0",
+    "dotenv": "^8.2.0",
+    "mongoose": "^5.10.13"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
