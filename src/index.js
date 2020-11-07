@@ -3,9 +3,11 @@ const Hapi = require('@hapi/hapi');
 const ratesService = require('./services/ratesService');
 require('dotenv').config({ path: `${__dirname}/variables.env` })
 
+const port = process.env.PORT || 4000;
+
 const init = async () => {
     const server = new Hapi.Server({
-        port: process.env.PORT,
+        port: port,
         host: process.env.HOST
     });
 
